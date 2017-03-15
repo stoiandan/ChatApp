@@ -1,0 +1,16 @@
+package ro.uvt.chatapp;
+
+public final class ChatAppModel {
+		private static ChatAppModel _instance = new ChatAppModel();
+	
+		public static ChatAppModel getInstance(){
+			return _instance;
+		}
+	
+		private ChatAppModel(){
+			
+		}
+		
+		public static ChatAppController mainController;
+		public static ContactsController contactsController;
+}	

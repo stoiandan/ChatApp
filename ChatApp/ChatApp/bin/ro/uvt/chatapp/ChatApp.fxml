@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ro.uvt.chatapp.ChatAppController">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="Manage Contacts">
+            <items>
+              <MenuItem fx:id="addContacts" mnemonicParsing="false" onAction="#AddContactsEventHandler" text="Add Contact" />
+              <SeparatorMenuItem mnemonicParsing="false" />
+              <MenuItem fx:id="recheckBtn" mnemonicParsing="false" onAction="#RecheckBtnEventHandler" text="Recheck" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem fx:id="aboutBtn" mnemonicParsing="false" onAction="#AboutBtnEventHandler" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <ListView fx:id="contactsList" onContextMenuRequested="#OnContextMenuEventHandler">
+            <ContextMenu fx:id="listViewContextMenu">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#RemoveContactsEventHandler" text="Remove" />
+                  <MenuItem mnemonicParsing="false" onAction="#EditContactsEventHandler" text="Edit" />
+              </items>
+            </ContextMenu>
+        </ListView>
+      <AnchorPane>
+         <children>
+            <ProgressBar prefHeight="18.0" prefWidth="600.0" progress="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
