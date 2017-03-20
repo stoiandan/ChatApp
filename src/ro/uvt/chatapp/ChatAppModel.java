@@ -17,5 +17,4 @@ public final class ChatAppModel {
 		public static ContactsController contactsController;
 		public static Contact currentSelectedContact;
 		public static int currentContactIndex = -1;
-		public static List<Contact> contactsList;
 }	

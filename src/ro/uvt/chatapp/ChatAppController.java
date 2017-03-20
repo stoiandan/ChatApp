@@ -31,21 +31,22 @@ public class ChatAppController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		ChatAppModel.mainController = this;
-		ChatAppModel.contactsList =  _contactsList;
-		ArrayList<Contact> tmp = new ArrayList<>();
 		try(InputStream os = new FileInputStream(new File(System.getProperty("user.home") + "/.contacts.bin"));
 				ObjectInputStream objOut = new ObjectInputStream(os)
 				)
 			{
-				tmp = (ArrayList<Contact>)  objOut.readObject();
+				_contactsList = FXCollections.observableList((ArrayList<Contact>)  objOut.readObject());
+				
 			} catch (FileNotFoundException e) {
-				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
+			}finally{
+				if(_contactsList == null){
+					_contactsList = FXCollections.observableArrayList();	
+				}
 			}
-		_contactsList =FXCollections.observableList(tmp);
 		contactsList.setItems(_contactsList);
 		contactsList.setContextMenu(listViewContextMenu);
 	}

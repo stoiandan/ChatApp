@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +31,7 @@ public class ChatApp extends Application {
 					ObjectOutputStream objOut = new ObjectOutputStream(os)
 					)
 				{
-					objOut.writeObject(new ArrayList<>(ChatAppModel.contactsList)  );
+					objOut.writeObject( (ArrayList<Contact>) ChatAppModel.mainController._contactsList.stream().collect(Collectors.toList()));
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
