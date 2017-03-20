@@ -1,5 +1,7 @@
 package ro.uvt.chatapp;
 
+import java.util.List;
+
 public final class ChatAppModel {
 		private static ChatAppModel _instance = new ChatAppModel();
 	
@@ -13,4 +15,7 @@ public final class ChatAppModel {
 		
 		public static ChatAppController mainController;
 		public static ContactsController contactsController;
+		public static Contact currentSelectedContact;
+		public static int currentContactIndex = -1;
+		public static List<Contact> contactsList;
 }	

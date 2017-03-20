@@ -17,13 +17,13 @@
           <Menu mnemonicParsing="false" text="Manage Contacts">
             <items>
               <MenuItem fx:id="addContacts" mnemonicParsing="false" onAction="#AddContactsEventHandler" text="Add Contact" />
-              <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem fx:id="recheckBtn" mnemonicParsing="false" onAction="#RecheckBtnEventHandler" text="Recheck" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Recheck" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem fx:id="aboutBtn" mnemonicParsing="false" onAction="#AboutBtnEventHandler" text="About" />
+              <MenuItem mnemonicParsing="false" text="About" />
             </items>
           </Menu>
         </menus>

@@ -1,8 +1,10 @@
 package ro.uvt.chatapp;
 
+import java.io.Serializable;
 import java.net.InetAddress;
 
-public class Contact {
+
+public class Contact implements Serializable {
 	private String name;
 	private InetAddress ipAddress;
 	private boolean isOnline;

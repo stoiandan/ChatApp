@@ -20,9 +20,9 @@ public class ContactsController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ChatAppModel.contactsController = this;
-		if(ChatAppController.tempA !=null && ChatAppController.tempN !=null){
-			ipTextField.setText(ChatAppController.tempA.getCanonicalHostName());
-			nameTextField.setText(ChatAppController.tempN);
+		if(ChatAppModel.currentSelectedContact != null){
+			ipTextField.setText(ChatAppModel.currentSelectedContact.getIpAddress().getHostName());
+			nameTextField.setText(ChatAppModel.currentSelectedContact.getName());
 		}
 		
 	}
@@ -44,11 +44,8 @@ public class ContactsController implements Initializable {
 			alert.showAndWait();
 			return;
 		}
-		if(ChatAppController.tempA !=null && ChatAppController.tempN !=null){
-			ChatAppModel.mainController.EditContactToList(nameTextField.getText(), InetAddress.getByName(ipTextField.getText()),ChatAppController.tempI);
-			ChatAppController.tempN=null;
-			ChatAppController.tempA=null;
-			ChatAppController.tempI=-1;
+		if(ChatAppModel.currentSelectedContact !=null){
+			ChatAppModel.mainController.EditContactToList(nameTextField.getText(), InetAddress.getByName(ipTextField.getText()),ChatAppModel.currentContactIndex);
 		}
 		else{
 		ChatAppModel.mainController.AddContactToList(nameTextField.getText(), InetAddress.getByName(ipTextField.getText()));
