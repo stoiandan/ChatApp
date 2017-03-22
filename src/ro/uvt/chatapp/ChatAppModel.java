@@ -1,7 +1,5 @@
 package ro.uvt.chatapp;
 
-import java.util.List;
-
 public final class ChatAppModel {
 		private static ChatAppModel _instance = new ChatAppModel();
 	

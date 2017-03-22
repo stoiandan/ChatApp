@@ -16,14 +16,23 @@
         <menus>
           <Menu mnemonicParsing="false" text="Manage Contacts">
             <items>
-              <MenuItem fx:id="addContacts" mnemonicParsing="false" onAction="#AddContactsEventHandler" text="Add Contact" />
+              <MenuItem mnemonicParsing="false" onAction="#AddContactsEventHandler" text="Add Contact" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="btnRechek" mnemonicParsing="false" onAction="#RecheckEventHandler" text="Recheck" />
+                  <MenuItem mnemonicParsing="false" onAction="#RecheckEventHandler" text="Recheck" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Settings">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Change Refresh Rate" onAction="#ChangeRRHandler" />
+              <MenuItem mnemonicParsing="false" text="Change Port" onAction="#ChangePortHandler" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="User Information" onAction="#UsrInfoHandler"/>
+              <SeparatorMenuItem mnemonicParsing="false" />
+              <MenuItem mnemonicParsing="false" text="About" onAction="#AboutHandler" />
+              <MenuItem mnemonicParsing="false" text="License" onAction="#LicenseHandler"/>
             </items>
           </Menu>
         </menus>
@@ -31,14 +40,16 @@
       <ListView fx:id="contactsList" onContextMenuRequested="#OnContextMenuEventHandler">
             <ContextMenu fx:id="listViewContextMenu">
               <items>
+	            <MenuItem mnemonicParsing="false" onAction="#StartChatEventHandler" text="Chat" />
+                <SeparatorMenuItem mnemonicParsing="false" />
+                <MenuItem mnemonicParsing="false" onAction="#EditContactsEventHandler" text="Edit" />
                 <MenuItem mnemonicParsing="false" onAction="#RemoveContactsEventHandler" text="Remove" />
-                  <MenuItem mnemonicParsing="false" onAction="#EditContactsEventHandler" text="Edit" />
               </items>
             </ContextMenu>
         </ListView>
       <AnchorPane>
          <children>
-            <ProgressBar prefHeight="18.0" prefWidth="600.0" progress="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ProgressBar fx:id="ProgressBarBottom" prefHeight="18.0" prefWidth="600.0" progress="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
    </children>

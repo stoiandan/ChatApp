@@ -22,7 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 
 public class ChatAppController implements Initializable {
@@ -34,30 +34,29 @@ public class ChatAppController implements Initializable {
 		initializeContactsList();
 		contactsList.refresh();
 	}
+	ObservableList<Contact> _contactsList;
 	
 	@FXML
-	private MenuItem addContacts;
+	ProgressBar ProgressBarBottom;
+	
+	@FXML
+	private ListView<Contact> contactsList;
 	
 	@FXML
 	ContextMenu listViewContextMenu;
 	
 	@FXML
-	private ListView<Contact> contactsList;
-	
-	ObservableList<Contact> _contactsList;
-	
-	@FXML
-	private MenuItem btnRechek;
+	private void OnContextMenuEventHandler(Event e){
+		listViewContextMenu.show(contactsList.getScene().getWindow());
+	}
 	
 	@FXML
-	private void RemoveContactsEventHandler(Event e){
-		_contactsList.remove(contactsList.getSelectionModel().getSelectedIndex());
-		contactsList.setItems(_contactsList);
+	private void StartChatEventHandler(Event e){
+		System.out.println("StartChatEventHandler - not implemented");
 	}
 	
 	@FXML
 	private void EditContactsEventHandler(Event e) throws IOException{
-		
 		ChatAppModel.currentSelectedContact = _contactsList.get(contactsList.getSelectionModel().getSelectedIndex());
 		ChatAppModel.currentContactIndex = contactsList.getSelectionModel().getSelectedIndex();
 
@@ -78,12 +77,11 @@ public class ChatAppController implements Initializable {
 		
 	}
 	
-	
 	@FXML
-	private void OnContextMenuEventHandler(Event e){
-		listViewContextMenu.show(contactsList.getScene().getWindow());
+	private void RemoveContactsEventHandler(Event e){
+		_contactsList.remove(contactsList.getSelectionModel().getSelectedIndex());
+		contactsList.setItems(_contactsList);
 	}
-	
 	
 	@FXML
 	private void AddContactsEventHandler(Event e) throws IOException
@@ -99,12 +97,34 @@ public class ChatAppController implements Initializable {
 		stage.show();
 	}
 	
-	public void EditContactToList(String name,InetAddress ipAdress,int index){
-		Contact tmp = new Contact(name,ipAdress);
-		
-		_contactsList.set(index,tmp);
-		contactsList.setItems(_contactsList);
+	@FXML
+	private void RecheckEventHandler(Event e){
 		contactsList.refresh();
+	}
+	
+	@FXML
+	private void ChangeRRHandler(Event e){
+		System.out.println("ChangeRRHandler - not implemented");
+	}
+	
+	@FXML
+	private void ChangePortHandler(Event e){
+		System.out.println("ChangePortHandler - not implemented");
+	}
+	
+	@FXML
+	private void UsrInfoHandler(Event e){
+		System.out.println("UsrInfoHandler - not implemented");
+	}
+	
+	@FXML
+	private void AboutHandler(Event e){
+		System.out.println("AboutHandler - not implemented");
+	}
+	
+	@FXML
+	private void LicenseHandler(Event e){
+		System.out.println("LicenseHandler - not implemented");
 	}
 	
 	public void AddContactToList(String name,InetAddress ipAdress){
@@ -115,12 +135,22 @@ public class ChatAppController implements Initializable {
 		contactsList.refresh();
 	}
 	
+	public void EditContactToList(String name,InetAddress ipAdress,int index){
+		Contact tmp = new Contact(name,ipAdress);
+		
+		_contactsList.set(index,tmp);
+		contactsList.setItems(_contactsList);
+		contactsList.refresh();
+	}
+	
+	
+	@SuppressWarnings("unchecked")
 	private void initializeContactsList(){
 		try(InputStream os = new FileInputStream(new File(System.getProperty("user.home") + "/.contacts.bin"));
 				ObjectInputStream objOut = new ObjectInputStream(os)
 				)
 			{
-				_contactsList = FXCollections.observableList((ArrayList<Contact>)  objOut.readObject());
+				_contactsList = FXCollections.observableList((ArrayList<Contact>) objOut.readObject());
 				
 			} catch (FileNotFoundException e) {
 			} catch (IOException e) {
@@ -136,8 +166,4 @@ public class ChatAppController implements Initializable {
 		contactsList.setContextMenu(listViewContextMenu);
 	}
 	
-	@FXML
-	private void RecheckEventHandler(Event e){
-		contactsList.refresh();
-	}
 }
