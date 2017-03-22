@@ -31,24 +31,8 @@ public class ChatAppController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		ChatAppModel.mainController = this;
-		try(InputStream os = new FileInputStream(new File(System.getProperty("user.home") + "/.contacts.bin"));
-				ObjectInputStream objOut = new ObjectInputStream(os)
-				)
-			{
-				_contactsList = FXCollections.observableList((ArrayList<Contact>)  objOut.readObject());
-				
-			} catch (FileNotFoundException e) {
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}finally{
-				if(_contactsList == null){
-					_contactsList = FXCollections.observableArrayList();	
-				}
-			}
-		contactsList.setItems(_contactsList);
-		contactsList.setContextMenu(listViewContextMenu);
+		initializeContactsList();
+		contactsList.refresh();
 	}
 	
 	@FXML
@@ -61,6 +45,9 @@ public class ChatAppController implements Initializable {
 	private ListView<Contact> contactsList;
 	
 	ObservableList<Contact> _contactsList;
+	
+	@FXML
+	private MenuItem btnRechek;
 	
 	@FXML
 	private void RemoveContactsEventHandler(Event e){
@@ -125,6 +112,32 @@ public class ChatAppController implements Initializable {
 		
 		_contactsList.add(tmp);
 		contactsList.setItems(_contactsList);
+		contactsList.refresh();
+	}
+	
+	private void initializeContactsList(){
+		try(InputStream os = new FileInputStream(new File(System.getProperty("user.home") + "/.contacts.bin"));
+				ObjectInputStream objOut = new ObjectInputStream(os)
+				)
+			{
+				_contactsList = FXCollections.observableList((ArrayList<Contact>)  objOut.readObject());
+				
+			} catch (FileNotFoundException e) {
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}finally{
+				if(_contactsList == null){
+					_contactsList = FXCollections.observableArrayList();	
+				}
+			}
+		contactsList.setItems(_contactsList);
+		contactsList.setContextMenu(listViewContextMenu);
+	}
+	
+	@FXML
+	private void RecheckEventHandler(Event e){
 		contactsList.refresh();
 	}
 }

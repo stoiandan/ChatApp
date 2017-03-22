@@ -1,5 +1,6 @@
 package ro.uvt.chatapp;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.net.InetAddress;
 
@@ -7,7 +8,6 @@ import java.net.InetAddress;
 public class Contact implements Serializable {
 	private String name;
 	private InetAddress ipAddress;
-	private boolean isOnline;
 	
 	public String getName() {
 		return name;
@@ -21,12 +21,6 @@ public class Contact implements Serializable {
 	public void setIpAddress(InetAddress ipAddress) {
 		this.ipAddress = ipAddress;
 	}
-	public boolean isOnline() {
-		return isOnline;
-	}
-	public void setOnline(boolean isOnline) {
-		this.isOnline = isOnline;
-	}
 	
 	public Contact(String name, InetAddress ipAddress) {
 		 this.name = name;
@@ -37,11 +31,14 @@ public class Contact implements Serializable {
 	public String toString() {
 		StringBuilder str = new StringBuilder(name);
 		
-		if(isOnline == true){
-			str.append("   (Online)");
-		}
-		else{
-			str.append("   (Offline)");
+		try {
+			if(ipAddress.isReachable(100)){
+				str.append("   (Online)");
+			}
+			else{
+				str.append("   (Offline)");
+			}
+		} catch (IOException e) {
 		}
 		
 		return str.toString();
