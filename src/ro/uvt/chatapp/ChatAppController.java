@@ -47,12 +47,19 @@ public class ChatAppController implements Initializable {
 	
 	@FXML
 	private void OnContextMenuEventHandler(Event e){
-		listViewContextMenu.show(contactsList.getScene().getWindow());
+		if(contactsList.getSelectionModel().getSelectedIndex() != -1){
+			listViewContextMenu.show(contactsList.getScene().getWindow());
+		}
+		else  listViewContextMenu.hide();
 	}
 	
 	@FXML
-	private void StartChatEventHandler(Event e){
-		System.out.println("StartChatEventHandler - not implemented");
+	private void StartChatEventHandler(Event e) throws IOException{
+		Parent root = FXMLLoader.load(getClass().getResource("./ChatWindow.fxml"));
+		Scene scene2 = new Scene(root);
+		Stage stage = new Stage();
+		stage.setScene(scene2);
+		stage.show();
 	}
 	
 	@FXML
