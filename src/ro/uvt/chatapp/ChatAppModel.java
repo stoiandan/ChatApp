@@ -13,6 +13,7 @@ public final class ChatAppModel {
 		
 		public static int refreshRate=200;//need to be Serializable
 		public static int port=12345;//need to be Serializable
+		
 		public static boolean settingThePort=false;
 		public static ChatAppController mainController;
 		public static ContactsController contactsController;
