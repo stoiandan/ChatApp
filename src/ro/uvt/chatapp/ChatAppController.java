@@ -59,6 +59,7 @@ public class ChatAppController implements Initializable {
 		Scene scene2 = new Scene(root);
 		Stage stage = new Stage();
 		stage.setScene(scene2);
+		stage.setResizable(false);
 		stage.show();
 	}
 	
@@ -110,13 +111,29 @@ public class ChatAppController implements Initializable {
 	}
 	
 	@FXML
-	private void ChangeRRHandler(Event e){
-		System.out.println("ChangeRRHandler - not implemented");
+	private void ChangeRRHandler(Event e) throws IOException{
+		
+		ChatAppModel.settingThePort=false;
+		
+		Parent root = FXMLLoader.load(getClass().getResource("./Settings.fxml"));
+		Scene scene2 = new Scene(root);
+		Stage stage = new Stage();
+		stage.setScene(scene2);
+		stage.setResizable(false);
+		stage.show();
 	}
 	
 	@FXML
-	private void ChangePortHandler(Event e){
-		System.out.println("ChangePortHandler - not implemented");
+	private void ChangePortHandler(Event e) throws IOException{
+		
+		ChatAppModel.settingThePort=true;
+		
+		Parent root = FXMLLoader.load(getClass().getResource("./Settings.fxml"));
+		Scene scene2 = new Scene(root);
+		Stage stage = new Stage();
+		stage.setScene(scene2);
+		stage.setResizable(false);
+		stage.show();
 	}
 	
 	@FXML
