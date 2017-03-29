@@ -7,6 +7,7 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,11 +21,13 @@ public class ContactsController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ChatAppModel.contactsController = this;
-		if(ChatAppModel.currentSelectedContact != null){
-			ipTextField.setText(ChatAppModel.currentSelectedContact.getIpAddress().getHostName());
-			nameTextField.setText(ChatAppModel.currentSelectedContact.getName());
-		}
 		
+			Platform.runLater( () -> {
+				if(ChatAppModel.currentSelectedContact != null){
+				ipTextField.setText(ChatAppModel.currentSelectedContact.getIpAddress().getHostName());
+				nameTextField.setText(ChatAppModel.currentSelectedContact.getName());
+				}
+			});
 	}
 	
 	@FXML
