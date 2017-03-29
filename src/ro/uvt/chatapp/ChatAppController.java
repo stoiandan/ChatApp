@@ -11,7 +11,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -67,24 +66,11 @@ public class ChatAppController implements Initializable {
 	
 	@FXML
 	private void EditContactsEventHandler(Event e) throws IOException{
+		if(ChatAppModel.currentContactIndex == -1){
 		ChatAppModel.currentSelectedContact = _contactsList.get(contactsList.getSelectionModel().getSelectedIndex());
 		ChatAppModel.currentContactIndex = contactsList.getSelectionModel().getSelectedIndex();
-
-		
-		Platform.runLater( () -> {
-		Parent root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("./Contacts.fxml"));
-			
-			Scene scene2 = new Scene(root);
-			Stage stage = new Stage();
-			stage.setScene(scene2);
-			stage.show();	
-		} catch (IOException e1) {
-			e1.printStackTrace();
-			}
-		});
-		
+		}
+		ChatAppModel.getInstance().getContactsWindow();
 	}
 	
 	@FXML
@@ -94,17 +80,8 @@ public class ChatAppController implements Initializable {
 	}
 	
 	@FXML
-	private void AddContactsEventHandler(Event e) throws IOException
-	{
-		ChatAppModel.currentSelectedContact = null;
-		ChatAppModel.currentContactIndex = -1;
-		Parent root = FXMLLoader.load(getClass().getResource("./Contacts.fxml"));
-		
-		Scene scene2 = new Scene(root);
-		
-		Stage stage = new Stage();
-		stage.setScene(scene2);
-		stage.show();
+	private void AddContactsEventHandler(Event e){
+		ChatAppModel.getInstance().getContactsWindow();
 	}
 	
 	@FXML

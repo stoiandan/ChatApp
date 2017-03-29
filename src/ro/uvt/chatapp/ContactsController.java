@@ -52,6 +52,7 @@ public class ContactsController implements Initializable {
 		}
 		Stage window = (Stage) nameTextField.getScene().getWindow();
 		window.close();
+		ChatAppModel.getInstance().clean();
 	}
 	
 }
