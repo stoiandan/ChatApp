@@ -44,10 +44,6 @@ public final class ChatAppModel {
 					Stage stage = new Stage();
 					stage.setScene(scene2);
 					
-					stage.setOnCloseRequest(event -> {
-						clean();
-					});
-					
 					stage.show();	
 				} catch (IOException e1) {
 					e1.printStackTrace();
@@ -55,13 +51,5 @@ public final class ChatAppModel {
 				});
 		}
 		
-		/* Temporary method used to set the
-		 * Contacts window onCloseEvent
-		 * Thread problem in ContactsController
-		 */
-		public void clean(){
-			isContactsWindowOn = false;
-			ChatAppModel.currentSelectedContact = null;
-			ChatAppModel.currentContactIndex = -1;
-		}
+
 }	
