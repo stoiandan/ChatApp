@@ -23,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 
@@ -39,6 +40,12 @@ public class ChatAppController implements Initializable {
 	
 	@FXML
 	ProgressBar ProgressBarBottom;
+	
+	@FXML
+	MenuItem editBtn;
+	
+	@FXML
+	MenuItem removeBtn;
 	
 	@FXML
 	private ListView<Contact> contactsList;
@@ -67,8 +74,8 @@ public class ChatAppController implements Initializable {
 	@FXML
 	private void EditContactsEventHandler(Event e) throws IOException{
 		if(ChatAppModel.currentContactIndex == -1){
-		ChatAppModel.currentSelectedContact = _contactsList.get(contactsList.getSelectionModel().getSelectedIndex());
-		ChatAppModel.currentContactIndex = contactsList.getSelectionModel().getSelectedIndex();
+			ChatAppModel.currentSelectedContact = _contactsList.get(contactsList.getSelectionModel().getSelectedIndex());
+			ChatAppModel.currentContactIndex = contactsList.getSelectionModel().getSelectedIndex();
 		}
 		ChatAppModel.getInstance().getContactsWindow();
 	}

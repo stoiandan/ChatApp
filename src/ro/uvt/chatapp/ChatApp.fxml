@@ -42,8 +42,8 @@
               <items>
 	            <MenuItem mnemonicParsing="false" onAction="#StartChatEventHandler" text="Chat" />
                 <SeparatorMenuItem mnemonicParsing="false" />
-                <MenuItem mnemonicParsing="false" onAction="#EditContactsEventHandler" text="Edit" />
-                <MenuItem mnemonicParsing="false" onAction="#RemoveContactsEventHandler" text="Remove" />
+                <MenuItem fx:id="editBtn" mnemonicParsing="false" onAction="#EditContactsEventHandler" text="Edit" />
+                <MenuItem fx:id="removeBtn" mnemonicParsing="false" onAction="#RemoveContactsEventHandler" text="Remove" />
               </items>
             </ContextMenu>
         </ListView>
