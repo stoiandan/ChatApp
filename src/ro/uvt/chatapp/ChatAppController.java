@@ -179,6 +179,18 @@ public class ChatAppController implements Initializable {
 		}
 	}
 	
+	@FXML
+	public void OnContextMenuOpen(Event e){
+		if(ChatAppModel.currentContactIndex != -1){
+			editBtn.setDisable(true);
+			removeBtn.setDisable(true);
+		}else{
+			editBtn.setDisable(false);
+			removeBtn.setDisable(false);
+		}
+		
+	}
+	
 	public void AddContactToList(String name,InetAddress ipAdress){
 		Contact tmp = new Contact(name,ipAdress);
 		

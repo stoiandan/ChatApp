@@ -38,7 +38,7 @@
         </menus>
       </MenuBar>
       <ListView fx:id="contactsList" onContextMenuRequested="#OnContextMenuEventHandler">
-            <ContextMenu fx:id="listViewContextMenu">
+            <ContextMenu fx:id="listViewContextMenu" onShowing="#OnContextMenuOpen">
               <items>
 	            <MenuItem mnemonicParsing="false" onAction="#StartChatEventHandler" text="Chat" />
                 <SeparatorMenuItem mnemonicParsing="false" />
