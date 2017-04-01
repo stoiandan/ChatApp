@@ -7,10 +7,13 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class SettingController implements Initializable {
@@ -18,55 +21,65 @@ public class SettingController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ChatAppModel.settingController=this;
+		SpinnerValueFactory<Integer> valueFactory; 
+        
 		if(ChatAppModel.settingThePort){
+			RRAnchor.setVisible(false);
 			lblSetting.setText("Change Port");
-			txtSetting.setText(Integer.toString(ChatAppModel.port));
-			txtSetting.setTooltip(new Tooltip("Between: 1 - 65535 (inclusive)"));
+			valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 65535, ChatAppModel.port);
+			helper.setTooltip(new Tooltip("Between: 1 - 65535 (inclusive)"));
 			
 		}
 		else{
+			RRAnchor.setVisible(true);
+			if(ChatAppModel.refreshRate==-1){
+				RRcheckbox.setSelected(true);
+				valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(10, 10000, 10);	
+			}else{
+				valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(10, 10000, ChatAppModel.refreshRate);
+				RRcheckbox.setSelected(false);
+			}
 			lblSetting.setText("Change Refresh Rate");
-			txtSetting.setText(Integer.toString(ChatAppModel.refreshRate));
-			txtSetting.setTooltip(new Tooltip("Between: 10 - "+Integer.MAX_VALUE+"tics\\sec\\min or -1 to disable"));
+			
+			helper.setTooltip(new Tooltip("Between: 10 - 10000 tics\\sec\\min"));
 		}
+		theSpinner.setEditable(true);
+		theSpinner.setValueFactory(valueFactory);
+		
 	}
 	
 	@FXML
     Label lblSetting;
+
+	@FXML
+	AnchorPane RRAnchor;
 	
 	@FXML
-	TextField txtSetting;
+	CheckBox RRcheckbox;
+	
+	@FXML
+	Spinner<Integer> theSpinner;
+	
+	@FXML
+	Label helper;
 	
 	@FXML
 	private void ConfirmHandler(Event e){	
-		if(txtSetting!=null){
+		if(theSpinner!=null){
 			try{
-				int temp=Integer.parseInt(txtSetting.getText());
+				int temp=theSpinner.getValue();
 				if(ChatAppModel.settingThePort){
-					if(temp>=1 && temp<=65535){
-						ChatAppModel.port=temp;
-						Stage window = (Stage) txtSetting.getScene().getWindow();
-						window.close();
-					}
-					else{
-						Alert alert = new Alert(AlertType.WARNING);
-						alert.setTitle("Field Out Of Bound");
-						alert.setHeaderText("Between: 1 - 65535 (inclusive)");
-						alert.showAndWait();
-					}
+					ChatAppModel.port=temp;
+					Stage window = (Stage) theSpinner.getScene().getWindow();
+					window.close();		
 				}
 				else{
-					if((temp>=10 && temp<=Integer.MAX_VALUE) || temp==-1){
-						Stage window = (Stage) txtSetting.getScene().getWindow();
-						window.close();
+					Stage window = (Stage) theSpinner.getScene().getWindow();
+					window.close();
+					if(RRcheckbox.isSelected()){
+						ChatAppModel.refreshRate=-1;
+					}else{
 						ChatAppModel.refreshRate=temp;
-					}
-					
-					else{
-						Alert alert = new Alert(AlertType.WARNING);
-						alert.setTitle("Field Out Of Bound");
-						alert.setHeaderText("Between: 10 - "+Integer.MAX_VALUE+" tics\\sec\\min or -1 to disable");
-						alert.showAndWait();
 					}
 				}
 				
