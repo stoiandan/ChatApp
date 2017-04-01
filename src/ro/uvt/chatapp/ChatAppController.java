@@ -48,6 +48,9 @@ public class ChatAppController implements Initializable {
 	MenuItem removeBtn;
 	
 	@FXML
+	MenuItem addContactsBtn;
+	
+	@FXML
 	private ListView<Contact> contactsList;
 	
 	@FXML
@@ -176,6 +179,16 @@ public class ChatAppController implements Initializable {
 			alert.showAndWait();
 		} catch(Exception except){
 			System.err.println(except);
+		}
+	}
+	
+	
+	@FXML
+	public void OnManageContactsOpen(Event e){
+		if(ChatAppModel.currentContactIndex != -1){
+			addContactsBtn.setDisable(true);
+		}else{
+			addContactsBtn.setDisable(false);
 		}
 	}
 	
