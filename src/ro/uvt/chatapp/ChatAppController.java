@@ -66,6 +66,7 @@ public class ChatAppController implements Initializable {
 	
 	@FXML
 	private void StartChatEventHandler(Event e) throws IOException{
+		ChatAppModel.currentSelectedContact = _contactsList.get(contactsList.getSelectionModel().getSelectedIndex());
 		Parent root = FXMLLoader.load(getClass().getResource("./ChatWindow.fxml"));
 		Scene scene2 = new Scene(root);
 		Stage stage = new Stage();

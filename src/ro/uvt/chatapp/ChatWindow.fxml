@@ -34,7 +34,7 @@
                   </AnchorPane>
                   <AnchorPane minHeight="-Infinity" minWidth="-Infinity" GridPane.columnIndex="1">
                      <children>
-                        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="57.0" prefWidth="63.0" text="Enter" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="57.0" prefWidth="63.0" text="Enter" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" onAction="#BtnEventHandler" />
                      </children>
                   </AnchorPane>
                </children>
