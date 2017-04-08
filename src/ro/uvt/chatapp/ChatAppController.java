@@ -35,6 +35,9 @@ public class ChatAppController implements Initializable {
 		ChatAppModel.mainController = this;
 		initializeContactsList();
 		contactsList.refresh();
+		// gets the unique instance for this ChatApp instance of a listener, that does just that:
+		//it listens on the agreed port and accepts income connections
+		Listener.getInstance().start(); 
 	}
 	ObservableList<Contact> _contactsList;
 	
