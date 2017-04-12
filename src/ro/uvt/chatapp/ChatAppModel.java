@@ -1,6 +1,9 @@
 package ro.uvt.chatapp;
 
 import java.io.IOException;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +31,7 @@ public final class ChatAppModel {
 		public static SettingController settingController;
 		public static Contact currentSelectedContact;
 		public static int currentContactIndex = -1;
+		public static List<Socket> clients = new ArrayList<>();
 		
 		private boolean isContactsWindowOn = false;
 		
