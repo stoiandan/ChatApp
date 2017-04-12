@@ -26,7 +26,7 @@ public class ChatApp extends Application {
 			stage.setScene(scene);
 			
 			stage.setOnCloseRequest( event ->{
-				
+				Listener.getInstance().stopListening(); // stops the thread, not really required because thread is daemon
 				try(OutputStream os = new FileOutputStream(new File(System.getProperty("user.home") + "/.contacts.bin"));
 					ObjectOutputStream objOut = new ObjectOutputStream(os)
 					)

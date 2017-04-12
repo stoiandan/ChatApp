@@ -48,11 +48,8 @@ public final class Listener extends Thread {
  			try {	
 			Socket client =  _server.accept();
 			ChatAppModel.clients.add(client);
-			System.out.println("Ceva");
-				Thread.sleep(500);
+			
 			}catch (IOException e) {
- 				e.printStackTrace();
-			} catch (InterruptedException e) {
  				e.printStackTrace();
 			}
 		}
