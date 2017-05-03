@@ -70,7 +70,7 @@ public class ChatAppController implements Initializable {
 	@FXML
 	private void StartChatEventHandler(Event e) throws IOException{
 		ChatAppModel.currentSelectedContact = _contactsList.get(contactsList.getSelectionModel().getSelectedIndex());
-		Parent root = FXMLLoader.load(getClass().getResource("./ChatWindow.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/ro/uvt/chatapp/ChatWindow.fxml"));
 		Scene scene2 = new Scene(root);
 		Stage stage = new Stage();
 		stage.setScene(scene2);
@@ -108,7 +108,7 @@ public class ChatAppController implements Initializable {
 		
 		ChatAppModel.settingThePort=false;
 		
-		Parent root = FXMLLoader.load(getClass().getResource("./Settings.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/ro/uvt/chatapp/Settings.fxml"));
 		Scene scene2 = new Scene(root);
 		Stage stage = new Stage();
 		stage.setScene(scene2);
@@ -121,7 +121,7 @@ public class ChatAppController implements Initializable {
 		
 		ChatAppModel.settingThePort=true;
 		
-		Parent root = FXMLLoader.load(getClass().getResource("./Settings.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/ro/uvt/chatapp/Settings.fxml"));
 		Scene scene2 = new Scene(root);
 		Stage stage = new Stage();
 		stage.setScene(scene2);

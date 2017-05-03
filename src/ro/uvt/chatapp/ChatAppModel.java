@@ -42,7 +42,7 @@ public final class ChatAppModel {
 			Platform.runLater( () -> {
 				Parent root;
 				try {
-					root = FXMLLoader.load(getClass().getResource("./Contacts.fxml"));
+					root = FXMLLoader.load(getClass().getResource("/ro/uvt/chatapp/Contacts.fxml"));
 					
 					Scene scene2 = new Scene(root);
 					Stage stage = new Stage();
