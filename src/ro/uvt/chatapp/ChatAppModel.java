@@ -33,7 +33,7 @@ public final class ChatAppModel {
 		public static int currentContactIndex = -1;
 		public static List<Socket> clients = new ArrayList<>();
 		
-		private boolean isContactsWindowOn = false;
+		public boolean isContactsWindowOn = false;
 		
 		public void getContactsWindow(){
 			if(isContactsWindowOn) return;
@@ -47,12 +47,13 @@ public final class ChatAppModel {
 					Scene scene2 = new Scene(root);
 					Stage stage = new Stage();
 					stage.setScene(scene2);
-					
+					stage.setOnCloseRequest(event ->ChatAppModel.getInstance().isContactsWindowOn = false);
 					stage.show();	
 				} catch (IOException e1) {
 					e1.printStackTrace();
 					}
 				});
+			
 		}
 		
 

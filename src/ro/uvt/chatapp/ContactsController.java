@@ -57,6 +57,8 @@ public class ContactsController implements Initializable {
 		window.close();
 		ChatAppModel.currentSelectedContact = null;		
 		ChatAppModel.currentContactIndex = -1;
+		ChatAppModel.getInstance().isContactsWindowOn = false;
 	}
+
 	
 }

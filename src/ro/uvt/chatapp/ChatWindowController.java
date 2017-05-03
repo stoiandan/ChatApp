@@ -21,7 +21,7 @@ public class ChatWindowController implements Initializable {
 	public void BtnEventHandler(Event e){
 		System.out.println(reciver.getIpAddress().toString());
 	}
-
+	
 	
 	
 }
