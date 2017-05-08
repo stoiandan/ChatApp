@@ -29,7 +29,7 @@
                <children>
                   <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
                      <children>
-                        <TextField minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0" prefWidth="535.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <TextField fx:id="messageTextField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0" prefWidth="535.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane minHeight="-Infinity" minWidth="-Infinity" GridPane.columnIndex="1">
