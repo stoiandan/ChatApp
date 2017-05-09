@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<SplitPane dividerPositions="0.8" maxHeight="400.0" maxWidth="600" minHeight="400" minWidth="600" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ro.uvt.chatapp.ChatWindowController">
+<SplitPane dividerPositions="0.8" maxHeight="400.0" maxWidth="600" minHeight="400" minWidth="600" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <items>
     <AnchorPane maxHeight="300.0" maxWidth="600.0" minHeight="100.0" minWidth="600.0" prefHeight="300.0" prefWidth="600.0">
          <children>

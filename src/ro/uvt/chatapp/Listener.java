@@ -41,16 +41,23 @@ public final class Listener extends Thread {
 		isRunning = false;
 	}
 	
+	/*
+	 * Initializes a conversation, oncer a client requests it
+	 * synchronized method in order to make it thread safe
+	 */
+	private synchronized void initializeConversation(Socket client){
+		ChatAppModel.getInstance().mainController.intializeChat(client);
+	}
+	
 	@Override
 	public void run() {
 		isRunning = true;
 		while(isRunning){
- 			try {	
-			Socket client =  _server.accept();
-			ChatAppModel.clients.add(client);
-			
-			}catch (IOException e) {
- 				e.printStackTrace();
+			try {
+				Socket client = _server.accept();
+				initializeConversation(client);
+			} catch (IOException e) {
+				System.out.println("Connection error, failed to retrieve client");
 			}
 		}
 	}

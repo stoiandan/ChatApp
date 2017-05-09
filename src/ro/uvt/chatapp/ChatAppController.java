@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.InetAddress;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -70,7 +72,9 @@ public class ChatAppController implements Initializable {
 	@FXML
 	private void StartChatEventHandler(Event e) throws IOException{
 		ChatAppModel.currentSelectedContact = _contactsList.get(contactsList.getSelectionModel().getSelectedIndex());
-		Parent root = FXMLLoader.load(getClass().getResource("/ro/uvt/chatapp/ChatWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ro/uvt/chatapp/ChatWindow.fxml"));
+		Parent root = loader.getRoot();
+		loader.setController(new ChatWindowController());
 		Scene scene2 = new Scene(root);
 		Stage stage = new Stage();
 		stage.setScene(scene2);
@@ -222,6 +226,24 @@ public class ChatAppController implements Initializable {
 		_contactsList.set(index,tmp);
 		contactsList.setItems(_contactsList);
 		contactsList.refresh();
+	}
+	
+	public void intializeChat(Socket client){
+		Platform.runLater( () -> {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ro/uvt/chatapp/ChatWindow.fxml"));
+		Parent root = null;
+		loader.setController(new ChatWindowController(client));
+		try {
+			root = (Parent) loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Scene scene2 = new Scene(root);
+		Stage stage = new Stage();
+		stage.setScene(scene2);
+		stage.setResizable(false);
+		stage.show();
+		});
 	}
 	
 	

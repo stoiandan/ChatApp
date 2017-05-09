@@ -31,7 +31,6 @@ public final class ChatAppModel {
 		public static SettingController settingController;
 		public static Contact currentSelectedContact;
 		public static int currentContactIndex = -1;
-		public static List<Socket> clients = new ArrayList<>();
 		
 		public boolean isContactsWindowOn = false;
 		

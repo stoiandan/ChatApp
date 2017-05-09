@@ -16,11 +16,23 @@ public class ChatWindowController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		receiver=ChatAppModel.currentSelectedContact;
-		conn = new NetwokConnection();	
+		conn =  client != null ? new NetwokConnection(client) :
+								 new NetwokConnection();
 		conn.start();
 	}
 	private NetwokConnection conn;
 	private Contact receiver;
+	private Socket client;
+	
+	// Initializes controller with the client that 
+	// requested the conversation
+    public ChatWindowController(Socket client){
+    	this.client = client;
+    }
+    
+    public ChatWindowController() {
+    	
+	}
 	
 	@FXML
 	TextField messageTextField;
@@ -50,17 +62,26 @@ public class ChatWindowController implements Initializable {
 			}
 		}
 		
-		@Override
+		public NetwokConnection(Socket client){
+			this.client = client;
+			try{
+			out = client.getOutputStream();
+			in = client.getInputStream();
+			} catch (IOException e) {
+				System.out.println("Network stream initailization problem");
+			}
+		}
+		
 		/* 
-		 *
+		 * Thread method used to read data from the other end of the connection
 		 */
+		@Override
 		public void run() {
 			byte[] buffer = new byte[4096];
 			while(true){
 				 try{
 				 in.read(buffer);
 				 System.out.println(new String(buffer));
-				 System.out.println("ajunge");
 				 }catch (IOException e) {
 					 System.out.println("Data stream error");
 					 break;
@@ -69,6 +90,7 @@ public class ChatWindowController implements Initializable {
 			
 		}
 		
+		// Method used to write messages to the other end of the connection
 		public void writeToServer(String message){
 			try{
 			out.write(message.getBytes());
