@@ -71,15 +71,22 @@ public class ChatAppController implements Initializable {
 	
 	@FXML
 	private void StartChatEventHandler(Event e) throws IOException{
+		Platform.runLater(() -> {
 		ChatAppModel.currentSelectedContact = _contactsList.get(contactsList.getSelectionModel().getSelectedIndex());
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ro/uvt/chatapp/ChatWindow.fxml"));
-		Parent root = loader.getRoot();
 		loader.setController(new ChatWindowController());
+		Parent root = null;
+		try {
+			root = loader.load();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		Scene scene2 = new Scene(root);
 		Stage stage = new Stage();
 		stage.setScene(scene2);
 		stage.setResizable(false);
 		stage.show();
+		});
 	}
 	
 	@FXML
