@@ -13,7 +13,7 @@
   <items>
     <AnchorPane maxHeight="300.0" maxWidth="600.0" minHeight="100.0" minWidth="600.0" prefHeight="300.0" prefWidth="600.0">
          <children>
-            <TextArea editable="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="343.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <TextArea fx:id="messageTextArea" editable="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="343.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
     <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="600.0">

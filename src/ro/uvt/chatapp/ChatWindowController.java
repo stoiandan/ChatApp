@@ -6,9 +6,11 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class ChatWindowController implements Initializable {
@@ -37,10 +39,17 @@ public class ChatWindowController implements Initializable {
 	@FXML
 	TextField messageTextField;
 	
+	@FXML
+	TextArea messageTextArea;
+	
 	@FXML 
 	public void BtnEventHandler(Event e){
-		conn.writeToServer(messageTextField.getText());
+		if(messageTextField.getText()!=null){
+			conn.writeToServer(messageTextField.getText());
+			messageTextArea.appendText("You: "+messageTextField.getText()+"\n");
+			messageTextField.setText(null);
 		}
+	}
 	
 	/*
 	 *  Inner class that handles data transfer
@@ -81,7 +90,8 @@ public class ChatWindowController implements Initializable {
 			while(true){
 				 try{
 				 in.read(buffer);
-				 System.out.println(new String(buffer));
+				 messageTextArea.appendText(receiver.getName()+": "+new String(buffer)+"\n");
+				 
 				 }catch (IOException e) {
 					 System.out.println("Data stream error");
 					 break;

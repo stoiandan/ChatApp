@@ -46,7 +46,7 @@ public final class Listener extends Thread {
 	 * synchronized method in order to make it thread safe
 	 */
 	private synchronized void initializeConversation(Socket client){
-		ChatAppModel.getInstance().mainController.intializeChat(client);
+		ChatAppModel.mainController.intializeChat(client);
 	}
 	
 	@Override
