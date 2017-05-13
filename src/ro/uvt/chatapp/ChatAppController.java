@@ -81,11 +81,14 @@ public class ChatAppController implements Initializable {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		Scene scene2 = new Scene(root);
-		Stage stage = new Stage();
-		stage.setScene(scene2);
-		stage.setResizable(false);
-		stage.show();
+		if(root !=null){
+			Scene scene2 = new Scene(root);
+			Stage stage = new Stage();
+			stage.setTitle("Chatting with "+ _contactsList.get(contactsList.getSelectionModel().getSelectedIndex()).getName());
+			stage.setScene(scene2);
+			stage.setResizable(false);
+			stage.show();
+		}
 		});
 	}
 	
@@ -219,6 +222,14 @@ public class ChatAppController implements Initializable {
 		
 	}
 	
+	public int contactTaken(InetAddress ipAdress){
+		for(int i=0;i<_contactsList.size();i++){
+			if(_contactsList.get(i).getIpAddress().equals(ipAdress) && i!=ChatAppModel.currentContactIndex)
+				return i;
+		}
+		return -1;
+	}
+	
 	public void AddContactToList(String name,InetAddress ipAdress){
 		Contact tmp = new Contact(name,ipAdress);
 		
@@ -247,6 +258,12 @@ public class ChatAppController implements Initializable {
 		}
 		Scene scene2 = new Scene(root);
 		Stage stage = new Stage();
+		if(ChatAppModel.mainController.contactTaken(client.getInetAddress())==-1){
+			stage.setTitle("Chatting with Unknown("+client.getInetAddress()+")");
+		}
+		else{
+			stage.setTitle("Chatting with "+ChatAppModel.mainController._contactsList.get(ChatAppModel.mainController.contactTaken(client.getInetAddress())).getName());
+		}
 		stage.setScene(scene2);
 		stage.setResizable(false);
 		stage.show();

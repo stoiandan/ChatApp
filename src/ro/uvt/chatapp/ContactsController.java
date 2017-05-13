@@ -39,7 +39,7 @@ public class ContactsController implements Initializable {
 	@FXML
 	private void AddContactsEnterPressEventHandler(Event e) throws UnknownHostException{
 		
-		if( (ipTextField.getText().length() < 7) || (nameTextField.getText().length() <3) ){	
+		if( (ipTextField.getText().length() < 7) || (nameTextField.getText().length() <3)){	
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("ChatApp");
 			alert.setHeaderText("Warning");
@@ -47,6 +47,17 @@ public class ContactsController implements Initializable {
 			alert.showAndWait();
 			return;
 		}
+		
+		if(ChatAppModel.mainController.contactTaken(InetAddress.getByName(ipTextField.getText()))!=-1){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("ChatApp");
+			alert.setHeaderText("Warning");
+			alert.setContentText("IP already has a name");
+			alert.showAndWait();
+			return;
+		}
+			
+		
 		if(ChatAppModel.currentSelectedContact !=null){
 			ChatAppModel.mainController.EditContactToList(nameTextField.getText(), InetAddress.getByName(ipTextField.getText()),ChatAppModel.currentContactIndex);
 		}

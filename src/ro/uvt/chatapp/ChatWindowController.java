@@ -16,24 +16,28 @@ import javafx.scene.control.TextField;
 public class ChatWindowController implements Initializable {
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		receiver=ChatAppModel.currentSelectedContact;
+	public void initialize(URL location, ResourceBundle resources) {	
 		conn =  client != null ? new NetwokConnection(client) :
 								 new NetwokConnection();
 		conn.start();
 	}
 	private NetwokConnection conn;
-	private Contact receiver;
+	private Contact receiver=null;
 	private Socket client;
 	
 	// Initializes controller with the client that 
 	// requested the conversation
     public ChatWindowController(Socket client){
     	this.client = client;
+    	if(ChatAppModel.mainController.contactTaken(client.getInetAddress())==-1)
+			receiver=new Contact("Unknown("+client.getInetAddress()+")",client.getInetAddress());
+		else
+			receiver=ChatAppModel.mainController._contactsList.get(ChatAppModel.mainController.contactTaken(client.getInetAddress()));
     }
     
     public ChatWindowController() {
-    	
+    	receiver=ChatAppModel.currentSelectedContact;
+    	ChatAppModel.currentSelectedContact=null;
 	}
 	
 	@FXML
@@ -67,6 +71,7 @@ public class ChatWindowController implements Initializable {
 			out = client.getOutputStream();
 			in  = client.getInputStream();
 			}catch(IOException e){
+				messageTextArea.appendText("\nNetwork stream initailization problem \n");
 				System.out.println("Network stream initailization problem");
 			}
 		}
@@ -77,7 +82,8 @@ public class ChatWindowController implements Initializable {
 			out = client.getOutputStream();
 			in = client.getInputStream();
 			} catch (IOException e) {
-				System.out.println("Network stream initailization problem");
+				messageTextArea.appendText("\nNetwork stream initailization problem \n");
+				System.out.println("Network stream initailization problem ");
 			}
 		}
 		
@@ -93,7 +99,8 @@ public class ChatWindowController implements Initializable {
 				 messageTextArea.appendText(receiver.getName()+": "+new String(buffer)+"\n");
 				 
 				 }catch (IOException e) {
-					 System.out.println("Data stream error");
+					 messageTextArea.appendText("\nData stream error \n");
+					 System.out.println("Data stream error ");
 					 break;
 				}
 			}
@@ -105,7 +112,8 @@ public class ChatWindowController implements Initializable {
 			try{
 			out.write(message.getBytes());
 			}catch(IOException e){
-				System.out.println("Network receiver stream error");
+				messageTextArea.appendText("\nNetwork receiver stream error \n");
+				System.out.println("Network receiver stream error ");
 			}
 		}
 	}
