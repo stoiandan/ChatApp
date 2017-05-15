@@ -21,9 +21,6 @@
    </rowConstraints>
    <children>
       <AnchorPane>
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="500.0" text="Add Contanct" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         </children>
       </AnchorPane>
       <GridPane GridPane.rowIndex="1">
          <columnConstraints>

@@ -1,6 +1,11 @@
 package ro.uvt.chatapp;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,7 +14,7 @@ import javafx.stage.Stage;
 
 public final class ChatAppModel {
 		private static final ChatAppModel _instance = new ChatAppModel();
-	
+		
 		public static ChatAppModel getInstance(){
 			return _instance;
 		}
@@ -18,8 +23,8 @@ public final class ChatAppModel {
 			
 		}
 		
-		public static int refreshRate=200;//need to be Serializable
-		public static int port=12345;//need to be Serializable
+		public static int refreshRate;
+		public static int port;
 		
 		public static boolean settingThePort=false;
 		public static ChatAppController mainController;
@@ -42,7 +47,17 @@ public final class ChatAppModel {
 					Scene scene2 = new Scene(root);
 					Stage stage = new Stage();
 					stage.setScene(scene2);
-					stage.setOnCloseRequest(event ->ChatAppModel.getInstance().isContactsWindowOn = false);
+					if(ChatAppModel.currentSelectedContact != null){
+						stage.setTitle("Edit Contact");
+					}
+					else{
+						stage.setTitle("Add Contact");
+					}
+					stage.setOnCloseRequest(event ->{
+						ChatAppModel.getInstance().isContactsWindowOn = false;
+						ChatAppModel.currentSelectedContact = null;		
+						ChatAppModel.currentContactIndex = -1;
+					});
 					stage.show();	
 				} catch (IOException e1) {
 					e1.printStackTrace();
@@ -51,5 +66,19 @@ public final class ChatAppModel {
 			
 		}
 		
+		public static void initializeSettings(){
+			try(InputStream os = new FileInputStream(new File(System.getProperty("user.home") + "/.settings.bin"));
+					ObjectInputStream objOut = new ObjectInputStream(os)
+					)
+				{
+					ChatAppModel.port=objOut.readInt();
+					ChatAppModel.refreshRate=objOut.readInt();
+				} catch (FileNotFoundException e) {
+					ChatAppModel.port=12345;
+					ChatAppModel.refreshRate=200;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
 
 }	

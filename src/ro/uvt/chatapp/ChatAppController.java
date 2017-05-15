@@ -126,6 +126,7 @@ public class ChatAppController implements Initializable {
 		Scene scene2 = new Scene(root);
 		Stage stage = new Stage();
 		stage.setScene(scene2);
+		stage.setTitle("Settings");
 		stage.setResizable(false);
 		stage.show();
 	}
@@ -139,6 +140,7 @@ public class ChatAppController implements Initializable {
 		Scene scene2 = new Scene(root);
 		Stage stage = new Stage();
 		stage.setScene(scene2);
+		stage.setTitle("Settings");
 		stage.setResizable(false);
 		stage.show();
 	}

@@ -27,11 +27,18 @@ public class ChatApp extends Application {
 			
 			stage.setOnCloseRequest( event ->{
 				Listener.getInstance().stopListening(); // stops the thread, not really required because thread is daemon
-				try(OutputStream os = new FileOutputStream(new File(System.getProperty("user.home") + "/.contacts.bin"));
-					ObjectOutputStream objOut = new ObjectOutputStream(os)
-					)
-				{
+				try{
+					OutputStream os = new FileOutputStream(new File(System.getProperty("user.home") + "/.contacts.bin"));
+					ObjectOutputStream objOut = new ObjectOutputStream(os);
+					OutputStream os2 = new FileOutputStream(new File(System.getProperty("user.home") + "/.settings.bin"));
+					ObjectOutputStream objOut2 = new ObjectOutputStream(os2);
 					objOut.writeObject( (ArrayList<Contact>) ChatAppModel.mainController._contactsList.stream().collect(Collectors.toList()));
+					objOut2.writeInt(ChatAppModel.port);
+					objOut2.writeInt(ChatAppModel.refreshRate);
+					objOut.close();
+					objOut2.close();
+					os.close();
+					os2.close();
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -46,6 +53,7 @@ public class ChatApp extends Application {
 	}
 	
 	public static void main(String[] args) {
+		ChatAppModel.initializeSettings();
 		launch(args);
 	}
 
